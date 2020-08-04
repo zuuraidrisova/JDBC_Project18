@@ -87,6 +87,7 @@ public class DB_Utility {
      /*
      * a static method to get the ResultSet object
      * with valid connection by executing query
+     *
      * */
     public static ResultSet runQuery(String query){
 
@@ -100,6 +101,7 @@ public class DB_Utility {
 
         return  rs ;
     }
+
 
 
 

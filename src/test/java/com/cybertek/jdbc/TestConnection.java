@@ -17,9 +17,9 @@ public class TestConnection {
 
         // GETTING DATABASE CONNECTION TO THE SERVER
         try {
-            Connection conn = DriverManager.getConnection(connectionStr,username,password);
+            Connection connection = DriverManager.getConnection(connectionStr,username,password);
             System.out.println("CONNECTION Successful!!");
-            conn.close();
+            connection.close();
         } catch (SQLException throwables) {
             System.err.println("CONNECTION WAS NOT SUCCESSFUL \n" + throwables.getMessage());
         }

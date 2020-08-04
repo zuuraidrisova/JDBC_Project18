@@ -4,8 +4,37 @@ import java.sql.*;
 
 public class DB_Utility {
     // adding static field so we can access in all static methods
-     private static Connection conn ;
-     private static  ResultSet rs ;
+     private static Connection connection ;
+     private static  ResultSet resultSet ;
+     private static ResultSetMetaData resultSetMetaData;
+
+     /*
+     getting single column cell value at certain row
+     * @param rowNum    row number we want to get data from
+     * @param columnIndex  column index we want to get the data from
+     * @return the data in String
+      */
+     public static String getColumnDataAtRow(int rowNum, int columnIndex){
+
+         //improve this method and check for valid rowNum and columnIndex
+         //if invalid return empty string
+         String result = "";
+         try {
+
+             resultSet.absolute(rowNum);
+
+             result = resultSet.getString(columnIndex);
+
+         } catch (SQLException e) {
+
+             System.out.println("Error while getting column data at row");
+             e.printStackTrace();
+         }
+
+         return result;
+
+     }
+
 
      /*
      * a method to display all the data in the result set
@@ -19,17 +48,17 @@ public class DB_Utility {
 
          try {
              // in order to start from beginning , we should be at beforefirst location
-             rs.beforeFirst();
-             while (rs.next() == true) { // row iteration
+             resultSet.beforeFirst();
+             while (resultSet.next() == true) { // row iteration
 
                  for (int i = 1; i <= colCount; i++) { // column iteration
-                     System.out.print(rs.getString(i) + "\t");
+                     System.out.print(resultSet.getString(i) + "\t");
                  }
                  System.out.println(); /// adding a blank line for next line
              }
              // now the cursor is at after last location
              // move it back to before first location so we can have no issue calling the method again
-             rs.beforeFirst();
+             resultSet.beforeFirst();
 
          }catch(SQLException e){
              System.out.println("ERROR WHILE GETTING ALL DATA");
@@ -48,18 +77,18 @@ public class DB_Utility {
      * */
      public static int getColumnCNT(){
 
-         int colCount = 0  ;
+         int columnCount = 0  ;
 
          try {
-             ResultSetMetaData rsmd = rs.getMetaData();
-             colCount = rsmd.getColumnCount() ;
+             resultSetMetaData= resultSet.getMetaData();
+             columnCount = resultSetMetaData.getColumnCount() ;
 
          } catch (SQLException e) {
              System.out.println("ERROR WHILE COUNTING THE COLUMNS");
              e.printStackTrace();
          }
 
-        return colCount ;
+        return columnCount ;
      }
 
 
@@ -75,7 +104,7 @@ public class DB_Utility {
         String password = "hr";
 
         try {
-            conn = DriverManager.getConnection(connectionStr, username, password);
+            connection = DriverManager.getConnection(connectionStr, username, password);
             System.out.println("CONNECTION SUCCESSFUL");
 
         } catch (SQLException e) {
@@ -94,14 +123,14 @@ public class DB_Utility {
     public static ResultSet runQuery(String query){
 
         try {
-            Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs =  stmnt.executeQuery(query) ;
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            resultSet =  statement.executeQuery(query) ;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return  rs ;
+        return  resultSet;
     }
 
 

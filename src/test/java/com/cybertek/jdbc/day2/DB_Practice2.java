@@ -10,17 +10,17 @@ public class DB_Practice2 {
         // print out all data from Jobs Table
         DB_Utility.createConnection();
 
-        ResultSet rs = DB_Utility.runQuery("SELECT * FROM REGIONS");
+        ResultSet resultSet = DB_Utility.runQuery("SELECT * FROM REGIONS");
+
         // this method call is displaying the data of the resultset
         DB_Utility.displayAllData();
 
         // move resultset cursor to second row
-        rs.absolute(2);
+        //resultSet.absolute(2);
 
         DB_Utility.displayAllData();
 
-
-
+        System.out.println("DB_Utility.getColumnDataAtRow(3,2) = " + DB_Utility.getColumnDataAtRow(3, 2));
 
 
 //        // get the first row data  | without knowing the column names

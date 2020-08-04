@@ -77,7 +77,9 @@ public class DB_Utility {
         try {
             conn = DriverManager.getConnection(connectionStr, username, password);
             System.out.println("CONNECTION SUCCESSFUL");
+
         } catch (SQLException e) {
+
             System.out.println("CONNECTION HAS FAILED!");
             e.printStackTrace();
         }

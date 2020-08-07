@@ -1,10 +1,7 @@
-package com.cybertek.jdbc.day2;
+package com.cybertek.jdbc.DB_Utilities;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DB_Utility {
 
@@ -53,7 +50,7 @@ public class DB_Utility {
       */
      public static Map<String, String> getRowAsMap(int rowNumber){
 
-         Map<String, String> rowMap = new HashMap<>();
+         Map<String, String> rowMap = new LinkedHashMap<>();//linkedHashMap keeps insertion order
 
          try{
 
@@ -80,6 +77,24 @@ public class DB_Utility {
          return rowMap;
      }
 
+    /**
+     *
+     * @return The entire resultset as List of Row Map
+     *
+     * so it's like : List = { map of 1st row}, { map of 2nd row}, {map of 3rd row}..
+     */
+
+    public static List<Map<String,String> > getAllDataAsListOfMap(){
+
+        List<Map<String,String> > rowMapList = new ArrayList<>();
+
+        for (int i = 1; i <= getRowCount(); i++) {
+
+            rowMapList.add(   getRowAsMap(i)    ) ;
+        }
+
+        return rowMapList ;
+    }
 
 
 
@@ -346,18 +361,54 @@ public class DB_Utility {
     }
 
 
+    public static void createConnection(String env){
 
+        String connectionStr = ConfigurationReader.getProperty(env+".database.url");
+        String username = ConfigurationReader.getProperty(env+".database.username");
+        String password = ConfigurationReader.getProperty(env+".database.password");
+
+       createConnection(connectionStr, username, password);
+        //just calling another method which creates a connection in order not to duplicate
+
+        System.out.println("You are in "+env+" environment");
+    }
+
+    /*
+
+    overload createConnection method by passing three parameters: connectionString, username, password
+    so we can provide those info for different database
+
+* @param url ==> connectionString
+ * @param username
+ * @param password
+     */
+    public static void createConnection(String connectionString,String username, String password){
+
+        try {
+
+            connection = DriverManager.getConnection(connectionString, username, password);
+            System.out.println("CONNECTION SUCCESSFUL");
+
+
+        }catch(SQLException e){
+
+            System.out.println("Error while connecting with parameters");
+            e.printStackTrace();
+        }
+
+
+    }
 
 
     /*
-     * a static method to create connection
+     * a static method to create connection between java and database
      * with valid url and username password
      * */
     public static void createConnection() {
 
-        String connectionStr = "jdbc:oracle:thin:@52.71.242.164:1521:XE";
-        String username = "hr";
-        String password = "hr";
+        String connectionStr = ConfigurationReader.getProperty("database.url");
+        String username = ConfigurationReader.getProperty("database.username");
+        String password = ConfigurationReader.getProperty("database.password");
 
         try {
             connection = DriverManager.getConnection(connectionStr, username, password);
@@ -368,6 +419,8 @@ public class DB_Utility {
             System.out.println("CONNECTION HAS FAILED!");
             e.printStackTrace();
         }
+
+       // createConnection(connectionStr,username,password);
 
     }
 

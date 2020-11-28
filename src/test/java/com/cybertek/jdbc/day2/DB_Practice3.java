@@ -32,9 +32,10 @@ public class DB_Practice3 {
 
             //System.out.println(resultSetMetaData.getColumnName(1));
             String columnName = resultSetMetaData.getColumnName(i);
+
             String columnValue =  resultSet.getString(i);
 
-        rowMap.put(columnName, columnValue);
+            rowMap.put(columnName, columnValue);
 
         }
 

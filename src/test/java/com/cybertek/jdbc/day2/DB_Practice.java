@@ -44,8 +44,6 @@ public class DB_Practice {
 
 
 
-
-
     }
 
 }

@@ -10,6 +10,7 @@ public class MapInsertionOrder {
         Map<String, Integer> scoreMap = new HashMap<>();
 
         //hashmap does not keep the insertion order, and does not sort so it is faster
+
         scoreMap.put("USA",10);
         scoreMap.put("Japan",9);
         scoreMap.put("Canada",8);

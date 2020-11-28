@@ -112,8 +112,10 @@ public class DB_Utility {
              resultSet.beforeFirst();
 
             while(resultSet.next()){
+
                 //getting the data from column and adding it to the list
                 String data = resultSet.getString(columnIndex);
+
                 columnDataList.add(data);
             }
 
@@ -142,8 +144,10 @@ public class DB_Utility {
              resultSet.beforeFirst();
 
              while(resultSet.next()){
+
                  //getting the data from column and adding it to the list
                  String data = resultSet.getString(columnName);
+
                  columnDataList.add(data);
              }
 
@@ -163,8 +167,8 @@ public class DB_Utility {
 
 
 
-     /*
-     getting single column cell value at certain row
+     /**
+         getting single column cell value at certain row
      * @param rowNum    row number we want to get data from
      * @param columnIndex  column index we want to get the data from
      * @return the data in String
@@ -174,6 +178,7 @@ public class DB_Utility {
         //improve this method and check for valid rowNum and columnIndex
         //if invalid return empty string
         String result = "";
+
         try {
 
             resultSet.absolute(rowNum);
@@ -189,8 +194,6 @@ public class DB_Utility {
         return result;
 
     }
-
-
 
 
 
@@ -298,6 +301,7 @@ public class DB_Utility {
         int rowCount = 0;
 
         try {
+
             resultSet.last();
             rowCount = resultSet.getRow();
 
@@ -326,7 +330,9 @@ public class DB_Utility {
          int columnCount = 0  ;
 
          try {
+
              resultSetMetaData= resultSet.getMetaData();
+
              columnCount = resultSetMetaData.getColumnCount() ;
 
          } catch (SQLException e) {
@@ -351,9 +357,11 @@ public class DB_Utility {
 
            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
+
             resultSet =  statement.executeQuery(query) ;
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         }
 

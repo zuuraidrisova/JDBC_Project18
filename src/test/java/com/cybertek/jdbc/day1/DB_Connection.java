@@ -10,7 +10,7 @@ public class DB_Connection {
 
         // Driver manager is used to get the connection
         // The IP address is the IP address of EC2 instance that have Oracle database
-        // This is mine , so yours will your EC2 instance IP
+        // This is mine , so yours will be your EC2 instance IP
         // This is known as connection string or url
         // it has few part
         // "jdbc:   making jdbc connection , always start with this
@@ -53,7 +53,7 @@ public class DB_Connection {
         System.out.println("second column value using column_name: --> " + rs.getString("REGION_NAME") ) ;
 
         // try to move to next row and get second row data as a task
-        rs.next();
+        rs.next();//this is next row which is second row
         System.out.println("first column value using index: --> " +  rs.getString(1)   );
         System.out.println("first column value using column_name: --> " + rs.getString("REGION_ID")   );
         // printing out second column data
@@ -67,6 +67,7 @@ public class DB_Connection {
         // RESULTSET -->> STATEMENT --> CONNECTION
         /// IT'S ALWAYS GOOD PRACTICE TO CLOSE THE RESOURCES ONCE FINISH USING THEM
         // TO AVOID ISSUES LATER.
+
 //------ cleaning up -----
         rs.close();
         stmnt.close();

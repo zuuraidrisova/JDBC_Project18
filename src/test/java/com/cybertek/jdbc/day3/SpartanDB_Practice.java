@@ -60,6 +60,7 @@ public class SpartanDB_Practice {
 
 
         DB_Utility.destroy();
+
     }
 
 

@@ -27,7 +27,6 @@ public class methodCalls {
 
         System.out.println("Getting the data at 3rd row as a map: "+DB_Utility.getRowAsMap(3));
 
-
         DB_Utility.destroy();
     }
 }

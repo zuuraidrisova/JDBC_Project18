@@ -19,7 +19,5 @@ public class MapInsertionOrder {
         System.out.println(scoreMap);
 
 
-
-
     }
 }

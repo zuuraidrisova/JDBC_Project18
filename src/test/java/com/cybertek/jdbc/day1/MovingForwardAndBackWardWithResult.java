@@ -6,8 +6,10 @@ public class MovingForwardAndBackWardWithResult {
 
     public static void main(String[] args) throws SQLException {
 
-        String connectionStr = "jdbc:oracle:thin:@52.71.242.164:1521:XE";
+        String connectionStr = "jdbc:oracle:thin:@54.236.150.168:1521:XE";
+
         String username = "hr";
+
         String password = "hr";
 
         Connection conn = DriverManager.getConnection(connectionStr, username, password);

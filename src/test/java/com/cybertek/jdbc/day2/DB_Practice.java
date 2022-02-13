@@ -12,6 +12,7 @@ public class DB_Practice {
         // print out all data from Jobs Table
         DB_Utility.createConnection();
 
+
         ResultSet resultSet = DB_Utility.runQuery("SELECT * FROM JOBS");
         // ITERATE OVER THE RESULTSET
 //        rs.next();
@@ -21,6 +22,7 @@ public class DB_Practice {
          while(resultSet.next() ){
 
              System.out.println(  resultSet.getString(1)  );
+
          }
 
         System.out.println("columnCount = " + DB_Utility.getColumnCount() );
@@ -34,15 +36,15 @@ public class DB_Practice {
         int colCount = DB_Utility.getColumnCount() ;
 
         resultSet.first() ; // moving to the first row
+
         for (int i = 1; i <= colCount ; i++) {
 
             System.out.print(  resultSet.getString( i )  + "\t" );
+
         }
 
 
         DB_Utility.destroy();
-
-
 
     }
 

@@ -21,9 +21,9 @@ public class methodCalls {
 
         System.out.println("Getting job_title column as a list: "+DB_Utility.getColumnDataAsList("job_title"));
 
-        System.out.println("Getting 3rd row, 2nd column data: "+DB_Utility.getEntireColumnDataAtRow(3,2));
+        System.out.println("Getting 3rd row, 2nd column data: "+DB_Utility.getColumnDataAtRow(3,2));
 
-        System.out.println("Getting 3rd row, job_title column data: "+DB_Utility.getEntireColumnDataAtRow(3, "job_title"));
+        System.out.println("Getting 3rd row, job_title column data: "+DB_Utility.getColumnDataAtRow(3, "job_title"));
 
         System.out.println("Getting the data at 3rd row as a map: "+DB_Utility.getRowAsMap(3));
 

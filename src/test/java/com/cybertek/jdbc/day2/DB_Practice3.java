@@ -14,6 +14,7 @@ public class DB_Practice3 {
     public static void main(String[] args) throws SQLException {
 
         DB_Utility.createConnection();
+
         ResultSet resultSet = DB_Utility.runQuery("select * from countries");
 
         //store first row data as a map of string and string

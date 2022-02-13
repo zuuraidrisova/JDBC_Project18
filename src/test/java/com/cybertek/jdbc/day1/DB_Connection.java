@@ -21,8 +21,7 @@ public class DB_Connection {
         // XE  :   SID name  unique identifier for the database we are connecting
         //  In a nutshell , see it as a full address of your database you can use to make connection
 
-
-        String connectionStr = "jdbc:oracle:thin:@52.71.242.164:1521:XE";
+        String connectionStr = "jdbc:oracle:thin:@54.236.150.168:1521:XE";
         String username = "hr" ;
         String password = "hr" ;
 
@@ -48,14 +47,17 @@ public class DB_Connection {
         //  print out region id and region name  , both as String
         System.out.println("first column value using index: --> " +  rs.getString(1)   );
         System.out.println("first column value using column_name: --> " + rs.getString("REGION_ID")   );
+
         // printing out second column data
         System.out.println("second column value using index: --> " + rs.getString(2) ) ;
         System.out.println("second column value using column_name: --> " + rs.getString("REGION_NAME") ) ;
 
         // try to move to next row and get second row data as a task
         rs.next();//this is next row which is second row
+
         System.out.println("first column value using index: --> " +  rs.getString(1)   );
         System.out.println("first column value using column_name: --> " + rs.getString("REGION_ID")   );
+
         // printing out second column data
         System.out.println("second column value using index: --> " + rs.getString(2) ) ;
         System.out.println("second column value using column_name: --> " + rs.getString("REGION_NAME") ) ;
@@ -70,13 +72,12 @@ public class DB_Connection {
 
 //------ cleaning up -----
         rs.close();
+
         stmnt.close();
+
         conn.close();
 
         System.out.println("THE END ");
-
-
-
 
     }
 

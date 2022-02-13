@@ -39,6 +39,7 @@ public class DB_Utility {
          }catch (SQLException e){
 
              System.out.println("ERROR WHILE CLOSING");
+
              e.printStackTrace();
          }
      }
@@ -166,65 +167,6 @@ public class DB_Utility {
 
 
 
-
-     /**
-         getting single column cell value at certain row
-     * @param rowNum    row number we want to get data from
-     * @param columnIndex  column index we want to get the data from
-     * @return the data in String
-      */
-        public static String getEntireColumnDataAtRow(int rowNum, int columnIndex){
-
-        //improve this method and check for valid rowNum and columnIndex
-        //if invalid return empty string
-        String result = "";
-
-        try {
-
-            resultSet.absolute(rowNum);
-
-            result = resultSet.getString(columnIndex);
-
-        } catch (SQLException e) {
-
-            System.out.println("Error while getting column data at row");
-            e.printStackTrace();
-        }
-
-        return result;
-
-    }
-
-
-
-    /*
-    overloaded method, it takes different type of parameter: int and String
-     */
-
-    public static String getEntireColumnDataAtRow(int rowNum, String columnName){
-
-        //improve this method and check for valid rowNum and columnIndex
-        //if invalid return empty string
-        String result = "";
-        try {
-
-            resultSet.absolute(rowNum);
-
-            result = resultSet.getString(columnName);
-
-        } catch (SQLException e) {
-
-            System.out.println("Error while getting column data at row");
-            e.printStackTrace();
-        }
-
-        return result;
-
-    }
-
-
-
-
     /*
     getting entire row data and store it into a list of strings
     @param rowNum the row number you want the list from
@@ -257,14 +199,72 @@ public class DB_Utility {
         return  rowDataList;
     }
 
+    /**
+     getting single column cell value at certain row
+     * @param rowNum    row number we want to get data from
+     * @param columnIndex  column index we want to get the data from
+     * @return the data in String
+     */
+    public static String getColumnDataAtRow(int rowNum, int columnIndex){
+
+        //improve this method and check for valid rowNum and columnIndex
+        //if invalid return empty string
+        String result = "";
+
+        try {
+
+            resultSet.absolute(rowNum);
+
+            result = resultSet.getString(columnIndex);
+
+        } catch (SQLException e) {
+
+            System.out.println("Error while getting column data at row");
+
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+
+
+    /*
+    overloaded above method, it takes different type of parameter: int and String
+     */
+
+    public static String getColumnDataAtRow(int rowNum, String columnName){
+
+        //improve this method and check for valid rowNum and columnIndex
+        //if invalid return empty string
+        String result = "";
+
+        try {
+
+            resultSet.absolute(rowNum);
+
+            result = resultSet.getString(columnName);
+
+        } catch (SQLException e) {
+
+            System.out.println("Error while getting column data at row");
+
+            e.printStackTrace();
+        }
+
+        return result;
+
+    }
+
+
 
     /*
      * a method to display all the data in the result set
-     *
+     *  get all row data  | without knowing the column names
      * */
      public static void displayAllData(){
 
-         // get the first row data  | without knowing the column names
          int colCount = DB_Utility.getColumnCount() ;
          // in order to get whole result cursor must be at before first location !
 
@@ -277,9 +277,12 @@ public class DB_Utility {
                  for (int i = 1; i <= colCount; i++) { // column iteration
 
                      System.out.print(resultSet.getString(i) + "\t");
+
                  }
+
                  System.out.println(); /// adding a blank line for next line
              }
+
              // now the cursor is at after last location
              // move it back to before first location so we can have no issue calling the method again
              resultSet.beforeFirst();
@@ -303,6 +306,7 @@ public class DB_Utility {
         try {
 
             resultSet.last();
+
             rowCount = resultSet.getRow();
 
             //moving cursor to the initial position again
@@ -315,7 +319,6 @@ public class DB_Utility {
 
         return rowCount;
     }
-
 
 
 
@@ -338,6 +341,7 @@ public class DB_Utility {
          } catch (SQLException e) {
 
              System.out.println("ERROR WHILE COUNTING THE COLUMNS");
+
              e.printStackTrace();
          }
 
@@ -356,6 +360,7 @@ public class DB_Utility {
         try {
 
            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+
                     ResultSet.CONCUR_READ_ONLY);
 
             resultSet =  statement.executeQuery(query) ;
@@ -363,6 +368,7 @@ public class DB_Utility {
         } catch (SQLException e) {
 
             e.printStackTrace();
+
         }
 
         return  resultSet;
@@ -372,7 +378,9 @@ public class DB_Utility {
     public static void createConnection(String env){
 
         String connectionStr = ConfigurationReader.getProperty(env+".database.url");
+
         String username = ConfigurationReader.getProperty(env+".database.username");
+
         String password = ConfigurationReader.getProperty(env+".database.password");
 
        createConnection(connectionStr, username, password);
@@ -395,13 +403,15 @@ public class DB_Utility {
         try {
 
             connection = DriverManager.getConnection(connectionString, username, password);
-            System.out.println("CONNECTION SUCCESSFUL");
 
+            System.out.println("CONNECTION SUCCESSFUL");
 
         }catch(SQLException e){
 
             System.out.println("Error while connecting with parameters");
+
             e.printStackTrace();
+
         }
 
 
@@ -415,30 +425,27 @@ public class DB_Utility {
     public static void createConnection() {
 
         String connectionStr = ConfigurationReader.getProperty("database.url");
+
         String username = ConfigurationReader.getProperty("database.username");
+
         String password = ConfigurationReader.getProperty("database.password");
 
         try {
+
             connection = DriverManager.getConnection(connectionStr, username, password);
+
             System.out.println("CONNECTION SUCCESSFUL");
+
 
         } catch (SQLException e) {
 
             System.out.println("CONNECTION HAS FAILED!");
+
             e.printStackTrace();
         }
 
        // createConnection(connectionStr,username,password);
 
     }
-
-
-
-
-
-
-
-
-
 
 }

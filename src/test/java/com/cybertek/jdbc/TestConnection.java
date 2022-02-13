@@ -13,7 +13,7 @@ public class TestConnection {
 
         System.out.println("Testing connection");
 
-        String connectionStr = "jdbc:oracle:thin:@52.71.242.164:1521:XE";
+        String connectionStr = "jdbc:oracle:thin:@54.236.150.168:1521:XE";
         String username = "hr";
         String password = "hr";
 
@@ -28,6 +28,7 @@ public class TestConnection {
             connection.close();
 
         } catch (SQLException throwables) {
+
 
             System.err.println("CONNECTION WAS NOT SUCCESSFUL \n" + throwables.getMessage());
         }
